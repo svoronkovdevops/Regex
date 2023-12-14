@@ -1095,28 +1095,37 @@ Support:
 - some regex engines use $1 through $9 instead
 
 Regex:  /(apples) to \1/
+
 String: "apples to apples"
 
 Regex:  /(ab)(cd)(ef)\3\2\1/
+
 String: "abcdefefcdab"
 
 Regex:  /(ab)(cd)(ef)(gh)(ij)\3\2\1\4\5/
+
 String: "abcdefghijefcdabghij"
 
 Regex:  /<(i|em)>.+?</\1>/
+
 String: "<i>Hello</i>" and  "<em>Hello</em>" (match)
+
 String: "<i>Hello</em>" and  "<em>Hello</i>" (does not match)
 
 Regex:  /<(i|em)>.+?</\1>/
+
 String: "<i>italics</i> <em>emphasis</em> <i>bad</em> <em>bad</i>"
 
 Regex:  /<(i|em|b|strong)>.+</\1>/
+
 String: "<b>bold</b> <strong>strong</strong>"
 
 Regex:  /\b([A-Z][a-z]+)\b\s\b\1son\b/
+
 String: "Steve Smith, John Johnson, Eric Erikson, Evan Evanson"(John Johnson and Evan Evanson)
 
 Regex:  /\b(\w+)\s+\1\b/
+
 String: "Paris in the 
          the spring."
 
@@ -1124,20 +1133,24 @@ String: "Paris in the
 ### Backreferences to optional expressions
 
 Regex:  /A?B/
+
 String: "AB B" (both matches)
 
 
 #### Captures occur on zero-width matches
 
 Regex:  /(A?)B/
+
 String: "AB B" matches "AB" and captures "A", matches "B" and captures ""
 
 #### Backreferences become zero-width too
 
 Regex:  /(A?)B\1/
+
 String: "ABA B" matches "ABA" and "B"
 
 Regex:  /(A?)B\1C/
+
 String: "ABAC BC" matches "ABAC" and "BC"
 
 
@@ -1145,9 +1158,11 @@ Captures do not always occur on optional groups
 *** Except in JavaScript ***
 
 Regex:  /(A)?B/
+
 String: "AB B"
 
 Regex:  /(A)?B\1/
+
 String: "ABA B" match "ABA"
 
 
@@ -1241,39 +1256,47 @@ Lookahead assertions - what ought to be ahead. If expr fails, the match fails. C
 syntax: /(?-regex)/
 
 Regex:  /(?=seashore)sea/
+
 String: "seashore seaside" match only sea in seashore
 
 Regex:  /sea(?=shore)/
+
 String: "seashore seaside" match only sea in seashore
 
 
 ### Contrast lookahead with capturing and non-capturing
 
 Regex:  /sea(?:shore)/
+
 String: "seashore seaside" match seashore
 
 Regex:  /(sea)shore/
+
 String: "seashore seaside" match seashore
 
 
 ### All words followed by a comma
 
 Regex:  /\b[A-Za-z']+?\b,/ matched word and coma
+
 String: (see self-reliance.txt) copy text to browser
 
 Regex:  /\b[A-Za-z']+?\b(?=,)/ matched word without coma
+
 String: (see self-reliance.txt)
 
 
 ### Compare with non-capturing
 
 Regex:  /\b[A-Za-z']+?\b(?:,)/
+
 String: (see self-reliance.txt)
 
 
 ### Double-testing with lookahead assertions
 
 Regex:  /\d{3}-\d{3}-\d{4}/
+
 String: "
 555-302-4321
 555-781-6978
@@ -1285,12 +1308,14 @@ Regex: /^[0-5\-]+$/ matches 555-302-4321 and 23140-5
 !!!! Make sure multiline anchors are enabled.
 
 Regex:  /(?=^[0-5\-]+$)\d{3}-\d{3}-\d{4}/m
+
 String: "
 555-302-4321
 555-781-6978
 555-245-1312
 "
 Regex:  /(?=^[0-5\-]+$)(?=.*4321)\d{3}-\d{3}-\d{4}/m
+
 String: "
 555-302-4321
 555-781-6978
@@ -1300,27 +1325,32 @@ String: "
 #### All words containing a "gh" and followed by a comma.
 
 Regex:  \b[A-Za-z']+?\b(?=,)
+
 String: (see self-reliance.txt) copy text to browser
 
 Regex:  \b(?=\w*gh)[A-Za-z']+?\b(?=,)
+
 String: (see self-reliance.txt)
 
 
 #### Password must be 8-15 characters
 
 Regex:  /^.{8,15}$/
+
 String: "swordfish"
 
 
 #### Password must be 8-15 characters and contain 1 digit
 
 Regex:  /^(?=.*\d).{8,15}$/
+
 String: "sword42fish"
 
 
 #### Password must be 8-15 characters and contain 1 digit and 1 capital letter
 
 Regex:  /^(?=.*\d)(?=.*[A-Z]).{8,15}$/
+
 String: "sword42Fish"
 
 ### Negative lookahead assertions
@@ -1336,14 +1366,18 @@ String: "sword42Fish"
 /online(?!.* training) does not match "online video training"
 
 Regex:  /\bblack\b(?! dog)/
+
 String: "The black dog followed the black car into the black night." match second black
 
 #### Contrasted with the positive lookahead assertion
+
 Regex:  /\bblack\b(?= dog)/
+
 String: "The black dog followed the black car into the black night." match fist black
 
 
 Regex:  /(?=^[0-5\-]+$)(?=.*4321)\d{3}-\d{3}-\d{4}/m (first)
+
 String: "
 555-302-4321
 555-781-6978
@@ -1351,6 +1385,7 @@ String: "
 "
 
 Regex:  /(?=^[0-5\-]+$)(?!.*4321)\d{3}-\d{3}-\d{4}/m (last)
+
 String: "
 555-302-4321
 555-781-6978
@@ -1360,25 +1395,30 @@ String: "
 #### All words NOT followed by a comma.
 
 Regex:  /\b[A-Za-z']+?\b(?=,)/
+
 String: see self-reliance.txt  copy text to browser
 
 #### All words NOT followed by a comma.
 
 Regex:  /\b[A-Za-z']+?\b(?!,)/
+
 String: see self-reliance.txt
 
 #### All words NOT followed by a comma or period
 
 Regex:  /\b[A-Za-z']+?\b(?![,.])/
+
 String: see self-reliance.txt
 
 
 #### Last occurrence: an item that isn't followed by itself.
 
 Regex:  /\bblack\b(?!.*\bblack\b)/
+
 String: "The black dog followed the black car into the black night."
 
 Regex:  /(\bblack\b)(?!.*\1)/
+
 String: "The black dog followed the black car into the black night."
 
 ### Lookbehind assertions 
@@ -1402,21 +1442,27 @@ not supported: JavaScript, Ruby 1.8, Unix
 #### Will not work in JavaScript!
 
 Regex:  /(?<=base)ball/
+
 String: "I like baseball and football." matches ball in baseball
 
 Regex:  /(?!=base)ball/
+
 String: "I like baseball and football." matches ball in both
 
 Regex:  /(jamin|ny)/
+
 String: "Benny Benjamin Jenny Lenny" match ends of all words
 
 Regex:  /(?<=Ben)(jamin|ny)/
+
 String: "Benny Benjamin Jenny Lenny" match nothing JS (ny in Benny)
 
 Regex:  /(?<=Ben|Jen)(jamin|ny)/
+
 String: "Benny Benjamin Jenny Lenny" match nothing JS (ends of first 3 words)
 
 Regex:  /(?<!Ben|Jen)(jamin|ny)/
+
 String: "Benny Benjamin Jenny Lenny" match nothing JS (ny in Lenny)
 
 
@@ -1437,13 +1483,16 @@ Zero-width means zero position movement /(?=seashore)sea/ matches sea in seashor
 #### These will not work in JavaScript!
 
 Regex:  /(?<![$\d])\d+\.\d\d/
+
 String: "This costs 53.00 or $54.00." matches 53.00
 
 
 #### Insertion by using all assertions
 
 Regex:  /(?<![$\d])(?=\d+\.\d\d)/
+
 String: "This costs 53.00 or $54.00."
+
 Replace: "$" (use notepad++) 53
 
 
@@ -1452,8 +1501,11 @@ Replace: "$" (use notepad++) 53
 String: "An astronomical unit is 149597870.7 kilometers, approximately the average distance between the Sun and Earth."
 
 Regex:  /(\d\d\d)+/
+
 Regex:  /(?<=\d)(\d\d\d)+(?!\d)/
+
 Regex:  /(?<=\d)(?=(\d\d\d)+(?!\d))/
+
 Replace: ","
 
 
@@ -1496,15 +1548,19 @@ supported: java, js, .NET, python, ruby
 perl and PHP use `\x`
 
 Regex:  /cafe/
+
 String: "cafe café café" match first
 
 Regex:  /café/
+
 String: "cafe café café"
 
 Regex:  /caf\u00E9/
+
 String: "cafe café café"
 
 Regex:  /caf\u0065\u0301/
+
 String: "cafe café café"
 
 
@@ -1544,6 +1600,7 @@ supported: java, .NET, ruby, php, perl
 not: js, python and unix tools
 
 Regex:  /caf\X/
+
 String: "cafe café café"
 
 
@@ -1551,6 +1608,7 @@ String: "cafe café café"
 Not supported in JavaScript
 
 Regex:  /caf\P{M}\p{M}/
+
 String: "cafe café café"
 
 
@@ -1597,12 +1655,15 @@ String: "cafe café café"
 #### Regular expression to match a year
 
 Regex:  /\d{4}/
+
 String: "2005 0000 9999"
 
 Regex:  /(19|20)\d\d/
+
 String: "2005 0000 9999 1900 2099"
 
 Regex:  /(19[5-9]\d|20[0-4]\d)/
+
 String: "2005 0000 9999 1900 2099 1950 2049"
 
 [Expressions content](#expressions-content)
@@ -1610,9 +1671,11 @@ String: "2005 0000 9999 1900 2099 1950 2049"
 #### Use anchors, delimiters, and context
 
 Regex:  /\w+/
+
 String: "%^@X&*!"
 
 Regex:  /^\w+$/
+
 String: "%^@X&*!"
 
 [Expressions content](#expressions-content)
@@ -1622,6 +1685,7 @@ String: "%^@X&*!"
 ### Match names
 
 Regex:  /\w+/
+
 String: "
 Kevin
 Lynda
@@ -1632,32 +1696,39 @@ Sally
 "
 
 Regex:  /^\w+$/m
+
 String: "$kevin"
 
 Regex:  /^[A-Za-z]+$/m
+
 String: "0kevin"
 
 #### Does first letter have to be capitalized?
 
 Regex:  /^[A-Z][A-Za-z]+$/m
+
 String: "kevin"
 
 Regex:  /^[A-Z][A-Za-z.'\-]+$/m
+
 String: "J.R."
 
 #### Match first and last name
 
 Regex:  /^[A-Z][A-Za-z.'\- ]+$/m
+
 String: "George Washington"
 
 #### Capture first and last name
 
 Regex:  /^([A-Z][A-Za-z.'\-]+) ([A-Z][A-Za-z.'\-]+)$/m
+
 String: "George Washington"
 
 #### Capture first, middle, and last name
 
 Regex:  /^([A-Z][A-Za-z.'\-]+) (?:([A-Z][A-Za-z.'\-]+) )?([A-Z][A-Za-z.'\-]+)$/m
+
 String: "John Quincy Adams"
 
 #### Tough call
@@ -1674,6 +1745,7 @@ String: "Martin Van Buren"
 #### U.S. postal codes
 
 Regex:  /\d{5}/
+
 String: "
 75087
 10010-6543
@@ -1681,18 +1753,21 @@ String: "
 "
 
 Regex:  /^\d{5}$/m
+
 Regex:  /^\d{5}(-\d{4})?$/m
 
 
 #### Canada postal codes
 
 Regex:  /^[A-Z]\d[A-Z] \d[A-Z]\d$/m
+
 String: "A9A 9A9"
 
 
 #### UK postal codes
 
 Regex: /^[A-Z]{1,2}\d{1,2}[A-Z]? \d[A-Z][A-Z]$/m
+
 String: "
 A9 9AA
 A99 9AA
@@ -1703,7 +1778,9 @@ AA9A 9AA
 "
 
 #### Allows an invalid format by accident
+
 String: "AA99A 9AA"
+
 Regex:  /^[A-Z]{1,2}\d{1,2}|[A-Z]{1,2}\d[A-Z] \d[A-Z][A-Z]$/m
 
 
@@ -1719,22 +1796,28 @@ Regex: /(GIR 0AA|[A-PR-UWYZ]([0-9][0-9A-HJKPS-UW]?|[A-HK-Y][0-9][0-9ABEHMNPRV-Y]
 ### Match email
 
 Regex:  /^\w+@\w+\.\w{3}$/
+
 String: "someone@somewhere.com"
 
 Regex:  /^[\w.%+\-]+@[\w.\-]+\.\w{2,3}$/
+
 String: "someone@somewhere.co.uk"
 
 Regex:  /^\w+@[\w.\-]+\.[A-Za-z]{2,3}$/
+
 String: "someone@somewhere.co.uk"
 
 #### Email and domain specifications allow other characters
+
 Regex:  /^[\w.%+\-]+@[\w.\-]+\.[A-Za-z]{2,3}$/
 
 Regex:  /^[\w.%+\-]+@[\w.\-]+\.[A-Za-z]{2,6}$/
+
 String: "someone@somewhere.museum"
 
 #### Top-level domain verfication
 Regex:  /^[\w.%+\-]+@[\w.\-]+\.([A-Za-z]{2}|aero|asia|biz|cat|com|coop|edu|gov|info|int|jobs|mil|mobi|museum|name|net|org|pro|tel|travel|xxx)$/
+
 String: "someone@somewhere.museum"
 
 [Expressions content](#expressions-content)
@@ -1760,19 +1843,27 @@ http://www.nowhere.com#details
 "
 
 #### Protocol portion
+
 Regex:  /^https?:\/\//
+
 Regex:  /^(http|https):\/\//
 
 #### Domain portion
+
 /^(http|https):\/\/[\w.\-]+\.[A-Za-z]{2,6}/
+
 /^(http|https):\/\/[\w\-_]+(\.[\w\-_]+)+/
 
 #### Query string portion
+
 Regex:  /^(http|https):\/\/[\w\-_]+(\.[\w\-_]+)+.*$/
+
 Regex:  /^(http|https):\/\/[\w\-_]+(\.[\w\-_]+)+[/?#]?.*$/
+
 Regex:  /^(http|https):\/\/[\w\-_]+(\.[\w\-_]+)+[\w\-.,@?^=%&:/~\\+#]*$/
 
 #### Make groups non-capturing
+
 Regex:  /^(?:http|https):\/\/[\w\-_]+(?:\.[\w\-_]+)+[\w\-.,@?^=%&:/~\\+#]*$/
 
 [Expressions content](#expressions-content)
@@ -1791,7 +1882,9 @@ String: "
 "
 
 Regex:  /^\d+\.\d+$/m
+
 Regex:  /^\d?\.\d+$/m
+
 Regex:  /^\d*\.?\d*$/m
 
 #### If everything is optional, it matches an empty string!
@@ -1809,18 +1902,23 @@ $.60
 "
 
 Dollar
+
 Regex:  /^\$(\d*\.\d{2}|\d+)$/m
 
 #### British Pound
 
 String: "£498.10"
+
 Regex:  /^(\$|£)(\d*\.\d{2}|\d+)$/m
+
 Regex:  /^(\$|\u00A3)(\d*\.\d{2}|\d+)$/m
 
 #### Japanese Yen
 
 String: "¥32.76"
+
 Regex:  /^(\$|\u00A3|¥)(\d*\.\d{2}|\d+)$/m
+
 Regex:  /^(\$|\u00A3|\u00A5|\uFFE5)(\d*\.\d{2}|\d+)$/m
 
 [Expressions content](#expressions-content)
@@ -1837,12 +1935,15 @@ String: "
 "
 
 Regex:  /\d+\.\d+.\d+\.\d+/m
+
 String: "999.999.999.99999999"
 
 Regex:  /\d{1,3}\.\d{1,3}.\d{1,3}\.\d{1,3}/m
+
 String: "999.999.999.999"
 
 Regex:  /[012]?[0-9]?[0-9]/m
+
 String: "299.299.299.299"
 
 
@@ -1851,36 +1952,43 @@ String: "299.299.299.299"
 #### 250-255
 
 Regex:  /25[0-5]/
+
 String: "200 255"
 
 #### 200-249
 
 Regex:  /2[0-4][0-9]/
+
 String: "200 249"
 
 #### 100-199
 
 Regex:  /1[0-9][0-9]/
+
 String: "100 199"
 
 #### 000-099
 
 Regex:  /0?[0-9]?[0-9]/
+
 String: "0 000 99 099"
 
 #### 000-099 (faster)
 
 Regex:  /0?[0-9][0-9]?/
+
 String: "0 000 99 099"
 
 #### 000-199
 
 Regex:  /[01]?[0-9][0-9]?/
+
 String: "0 000 99 099 100 199"
 
 #### 000-255
 
 Regex:  /(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)/
+
 String: "0 000 99 099 100 199 200 249 200 255 256 299"
 
 
@@ -1910,20 +2018,25 @@ String: "
 2000-06-09
 2000/6/9
 "
+
 Regex:  /^\d\d\d\d-\d\d-\d\d$/m
+
 Regex:  /^\d{4}-\d{1,2}-\d{1,2}$/m
+
 Regex:  /^\d{4}[-/]\d{1,2}[-/]\d{1,2}$/m
 
 
 #### Month should be 1-12
 
 String: "2000-14-55"
+
 Regex:  /^\d{4}[-/](0?[1-9]|1[012])[-/]\d{1,2}$/m
 
 
 #### Date should be 1-31
 
 String: "2000-12-55"
+
 Regex:  /^\d{4}[-/](0?[1-9]|1[012])[-/](0?[1-9]|[12][0-9]|3[01])$/m
 
 
@@ -1935,12 +2048,14 @@ String: "
 2050-12-31
 2051-12-31
 "
+
 Regex:  /^(19[5-9][0-9]|20[0-4][0-9]|2050)[-/](0?[1-9]|1[012])[-/](0?[1-9]|[12][0-9]|3[01])$/m
 
 
 #### On your own
 
 String: "January 31, 2012"
+
 Regex:  ?
 
 [Expressions content](#expressions-content)
@@ -1966,15 +2081,18 @@ String: "
 #### 12 hour time
 
 Regex:  /^\d:\d\d$/m
+
 Regex:  /^\d{1,2}:\d{2}$/m
 
 String: "99:99"
+
 Regex:  /^(0?[1-9]|1[0-2]):[0-5][0-9]$/m
 
 
 #### Optional am/pm
 
 Regex:  /^(0?[1-9]|1[0-2]):[0-5][0-9](am|pm|AM|PM)?$/m
+
 Regex:  /^(0?[1-9]|1[0-2]):[0-5][0-9]([aApP][mM])?$/m
 
 
@@ -1985,7 +2103,9 @@ String: "
 23:45
 24:45
 "
+
 Regex:  /^(0?[0-9]|1[0-9]|2[0-3]):[0-5][0-9]$/m
+
 Regex:  /^([0-1]?[0-9]|[2][0-3]):[0-5][0-9]?$/m
 
 
@@ -1997,6 +2117,7 @@ Regex:  /^([0-1]?[0-9]|[2][0-3]):[0-5][0-9](:[0-5][0-9])?$/m
 #### Timezone
 
 Regex:  /^([0-1]?[0-9]|[2][0-3]):[0-5][0-9](:[0-5][0-9])?( [A-Z]{3})?$/m
+
 Regex:  /^([0-1]?[0-9]|2[0-3]):[0-5][0-9](:[0-5][0-9])?( ([A-Z]{3}|GMT [-+]([0-9]|1[0-2])))?$/m
 
 [Expressions content](#expressions-content)
@@ -2016,19 +2137,23 @@ String: "
 "
 
 Regex:  /^<strong>(.*?)</strong>$/m
+
 Regex:  /^<(strong|em)>(.*?)</(strong|em)>$/m
 
 
 #### Balancing tags
 
 String: "<strong>Mistake</em>"
+
 Regex:  /^<(strong|em)>(.*?)</\1>$/m
 
 
 #### Flexibility
 
 Regex:  /^<(strong|em|b|i)>(.*?)</\1>$/m
+
 Regex:  /^<(.+?)>(.*?)</\1>$/m
+
 Regex:  /^<([^>]+)>(.*?)</\1>$/m
 
 
@@ -2040,6 +2165,7 @@ Regex:  /^<([A-Za-z][A-Za-z0-9]*)\b[^>]*>(.*?)</\1>$/m
 #### Self-closing tags
 
 Regex:  /^<(([A-Za-z][A-Za-z0-9]*)\b[^>]*>(.*?)</\1>|[A-Za-z][A-Za-z0-9]*\b[^/>]*/>)$/m
+
 Regex:  /^<(?:([A-Za-z][A-Za-z0-9]*)\b[^>]*>(?:.*?)</\1>|[A-Za-z][A-Za-z0-9]*\b[^/>]*/>)$/m
 
 [Expressions content](#expressions-content)
@@ -2059,6 +2185,7 @@ Must include at least one numeric digit
 Must include at least one symbol
 
 String: "swordfish"
+
 Regex:  /^.+$/m
 
 #### May contain any character except space
@@ -2073,6 +2200,7 @@ Regex:  /^\S{8,15}$/m
 ####  Must include at least one uppercase letter
 
 Regex:  /^(?=.*[A-Z])\S{8,15}$/m
+
 String: "swordFish"
 
 ####  Must include at least one lowercase letter
@@ -2082,11 +2210,13 @@ Regex:  /^(?=.*[A-Z])(?=.*[a-z])\S{8,15}$/m
 ####  Must include at least one numeric digit
 
 Regex:  /^(?=.*\d)(?=.*[A-Z])(?=.*[a-z])\S{8,15}$/m
+
 String: "sword42Fish"
 
 ####  Must include at least one symbol
 
 Regex:  /^(?=.*\d)(?=.*[~!@#$%^&*()_\-+=|\\{}[\]:;<>?/])(?=.*[A-Z])(?=.*[a-z])\S{8,15}$/m
+
 String: "sword#42Fish"
 
 [Expressions content](#expressions-content)
@@ -2115,11 +2245,13 @@ Discover
 "
 
 Regex:  /^\d+$/m
+
 Regex:  /^[\d\- ]+$/m
 
 #### Correct length
 
 Regex:  /^[\d\- ]{15,16}$/m
+
 Regex:  /^[\d\- ]{15,19}$/m
 
 #### Correctly delimited (without Amex)
@@ -2129,6 +2261,7 @@ Regex:  /^\d{4}[\- ]?\d{4}[\- ]?\d{4}[\- ]?\d{4}$/m
 #### Require same delimter
 
 String: "40001234-1234 1234"
+
 Regex:  /^\d{4}([- ]?)\d{4}\1\d{4}\1\d{4}$/m
 
 #### Validate by type
@@ -2137,6 +2270,7 @@ Regex:  /^\d{4}([- ]?)\d{4}\1\d{4}\1\d{4}$/m
 ####   Discover prefix: 6011
 
 Regex:  /^[456]\d{3}([\- ]?)\d{4}\1\d{4}\1\d{4}$/m
+
 Regex:  /^(?:4\d{3}|5[1-5]\d{2}|6011)([\- ]?)\d{4}\1\d{4}\1\d{4}$/m
 
 
@@ -2168,8 +2302,11 @@ String: use self-reliance.txt
 #### Word1 near word2
 
 Regex:  /[Aa].*[Mm]an/
+
 Regex:  /[Aa](.+)[Mm]an/
+
 Regex:  /[Aa](?:.+)[Mm]an/
+
 Regex:  /[Aa](?:.+?)[Mm]an/
 
 #### Use word boundaries
@@ -2207,23 +2344,30 @@ use  `midsummer_nights_dream.txt` in notepad++
 #### Replace first
 
 ##### ( to [
+
 Regex:    /^\(/
 
 Regex:    /\n\n\(/
+
 Replace:  "\n\n\n["
 
 ##### Did we miss any?
+
 Regex:    /\n^(/
+
 Replace:  "\n["
 
 ##### ) to ]
+
 Regex:    /)$/
+
 Replace:  "]"
 
 #### Replace second
 
 
 Regex:    /ACT ([A-Z]+?)\nSCENE ([A-Z]+?)\. (.+?)\n/
+
 Replace:  "----------
 Act: $1
 Scene: $2
@@ -2234,17 +2378,27 @@ Location: $3
 #### Replace third
 
 ##### "THESEUS\n" to "THESEUS: "
+
 Regex:    /[A-Z]+/
+
 Regex:    /^[A-Z]+$/
+
 Regex:    /^([A-Z]+)\n/
+
 Replace:  "$1: "
 
 ##### Add four spaces of indentation to spoken lines
+
 Regex:    /^[A-Z]+: /
+
 Regex:    /^(?![A-Z]+: )/
+
 Regex:    /^(?!([A-Z]+: |[\[\-]))/
+
 Regex:    /^(?!([A-Z]+: |\n|[\[\-]))/
+
 Regex:    /^(?!([A-Z]+: |\n|[\[\-]|Act: |Scene: |Location: ))/
+
 Replace:  "    "
 
 
